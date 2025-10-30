@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -14,78 +16,92 @@ class AuthController extends Controller
         return view('login-form');
     }
 
+    public function register()
+    {
+        return view('register-form');
+    }
+
     public function login(Request $request)
     {
-        // dd($request->all());
-        // exit;
-
+        // Validasi input
         $request->validate(
             [
-                'username' => 'required|string',
-                'password' => 'required|string|min:3|regex:/[A-Z]/',
+                'name' => 'required|string',
+                'password' => 'required|string|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/',
             ],
             [
-                'username.required' => 'Username wajib diisi',
+                'name.required' => 'name wajib diisi',
                 'password.required' => 'Password wajib diisi',
-                'password.min' => 'Password minimal 3 karakter',
-                'password.regex' => 'Password harus mengandung setidaknya satu huruf kapital',
+                'password.min' => 'Password minimal 8 karakter',
+                'password.regex' => 'Password harus mengandung huruf besar, huruf kecil, dan angka',
             ]
         );
 
-        if ($request->username == 'rudio123' && $request->password == 'Rudio123') {
-            $data['username'] = $request->username;
-            $data['password'] = $request->password;
-            return redirect()->route('dashboard', compact('data'));
-        } else {
-            return redirect('login');
+        // Cek kredensial
+        $credentials = [
+            'name' => $request->name,
+            'password' => $request->password,
+        ];
+
+        if (Auth::attempt($credentials)) {
+            // Login berhasil
+            $request->session()->regenerate();
+
+            return redirect()->route('dashboard')->with('success', 'Login berhasil! Selamat datang, ' . Auth::user()->name);
         }
+
+        // Login gagal
+        return back()->withErrors([
+            'name' => 'name atau password salah',
+        ])->withInput($request->only('name'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function logout(Request $request)
     {
-        //
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('dashboard')->with('success', 'Logout berhasil');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function processRegister(Request $request)
     {
-        //
-    }
+        // Validasi input
+        $request->validate(
+            [
+                'name' => 'required|string|min:4|max:50|unique:users,name',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/',
+                'password_confirmation' => 'required|same:password',
+            ],
+            [
+                'name.required' => 'name wajib diisi',
+                'name.min' => 'name minimal 4 karakter',
+                'name.unique' => 'name sudah digunakan',
+                'email.required' => 'Email wajib diisi',
+                'email.email' => 'Format email tidak valid',
+                'email.unique' => 'Email sudah terdaftar',
+                'password.required' => 'Password wajib diisi',
+                'password.min' => 'Password minimal 8 karakter',
+                'password.regex' => 'Password harus mengandung huruf besar, huruf kecil, dan angka',
+                'password_confirmation.required' => 'Konfirmasi password wajib diisi',
+                'password_confirmation.same' => 'Konfirmasi password tidak cocok',
+            ]
+        );
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // Simpan user baru
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password); // Hash password
+        $user->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        // Login otomatis setelah register
+        Auth::login($user);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // Redirect ke dashboard
+        return redirect()->route('dashboard')->with('success', 'Registrasi berhasil! Selamat datang, ' . $user->name);
     }
 }

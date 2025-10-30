@@ -4,18 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Register - Minimalis Hijau</title>
+    <title>Login - Minimalis Hijau</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #2E8B57;
-            /* Sea Green */
             --primary-light: #3CB371;
-            /* Medium Sea Green */
             --primary-dark: #1F5E3D;
-            /* Dark Green */
             --accent-color: #50C878;
-            /* Emerald Green */
             --text-color: #333333;
             --light-gray: #f5f5f5;
             --white: #ffffff;
@@ -57,36 +53,11 @@
             justify-content: center;
         }
 
-        .form-toggle {
-            display: flex;
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
             margin-bottom: 30px;
-        }
-
-        .toggle-btn {
-            flex: 1;
-            padding: 12px;
-            text-align: center;
-            background: none;
-            border: none;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--text-color);
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
-        }
-
-        .toggle-btn.active {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-        }
-
-        .form {
-            display: none;
-        }
-
-        .form.active {
-            display: block;
+            color: var(--primary-dark);
         }
 
         .form-title {
@@ -138,6 +109,37 @@
             background-color: var(--primary-dark);
         }
 
+        .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .forgot-password a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
         .divider {
             display: flex;
             align-items: center;
@@ -186,21 +188,6 @@
             margin-right: 8px;
         }
 
-        .forgot-password {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .forgot-password a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
-
         .image-container {
             flex: 1;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
@@ -224,11 +211,10 @@
             opacity: 0.9;
         }
 
-        .logo {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: var(--primary-dark);
+        .error-text {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
         }
 
         @media (max-width: 768px) {
@@ -248,32 +234,40 @@
         <div class="form-container">
             <div class="logo">Brand</div>
 
-            <div class="form-toggle">
-                <button class="toggle-btn active" onclick="showForm('login')">Login</button>
-                <button class="toggle-btn" onclick="showForm('register')">Register</button>
-            </div>
-
-            <!-- Login Form -->
-            <form action="{{ route("proses-login") }}" method="post" id="login-form" class="form active">
+            <form action="{{ route('login.process') }}" method="POST">
                 @csrf
                 <h2 class="form-title">Masuk ke Akun Anda</h2>
+
+                @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+
                 @if ($errors->any())
                 <div class="alert alert-danger">
-                    <ul>
+                    <ul class="mb-0">
                         @foreach ($errors->all() as $err)
-                        <li>{{$err}}</li>
+                        <li>{{ $err }}</li>
                         @endforeach
                     </ul>
                 </div>
                 @endif
+
                 <div class="input-group">
-                    <label class="input-label" for="username">Username</label>
-                    <input type="text" name="username" class="input-field" placeholder="Masukkan username" value="{{ old('username') }}">
+                    <label class="input-label" for="name">Username</label>
+                    <input type="text" name="name" id="name" class="input-field"
+                        placeholder="Masukkan name" value="{{ old('name') }}" required>
+                    @error('name')
+                    <span class="error-text">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="input-group">
                     <label class="input-label" for="password">Password</label>
-                    <input type="password" name="password" class="input-field" placeholder="Masukkan password" value="{{ old('password') }}">
+                    <input type="password" name="password" id="password" class="input-field"
+                        placeholder="Masukkan password" required>
+                    @error('password')
+                    <span class="error-text">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <button type="submit" class="submit-btn">Masuk</button>
@@ -306,59 +300,19 @@
                         Facebook
                     </button>
                 </div>
-            </form>
 
-            <!-- Register Form -->
-            <form id="register-form" class="form">
-                <h2 class="form-title">Buat Akun Baru</h2>
-
-                <div class="input-group">
-                    <label class="input-label" for="register-name">Nama Lengkap</label>
-                    <input type="text" id="register-name" class="input-field" placeholder="Masukkan nama lengkap" required>
+                <div class="register-link">
+                    Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a>
                 </div>
-
-                <div class="input-group">
-                    <label class="input-label" for="register-email">Email</label>
-                    <input type="email" id="register-email" class="input-field" placeholder="nama@contoh.com" required>
-                </div>
-
-                <div class="input-group">
-                    <label class="input-label" for="register-password">Password</label>
-                    <input type="password" id="register-password" class="input-field" placeholder="Buat password" required>
-                </div>
-
-                <div class="input-group">
-                    <label class="input-label" for="register-confirm">Konfirmasi Password</label>
-                    <input type="password" id="register-confirm" class="input-field" placeholder="Ulangi password" required>
-                </div>
-
-                <button type="submit" class="submit-btn">Daftar</button>
             </form>
         </div>
 
         <div class="image-container">
-            <h2>Selamat Datang</h2>
-            <p>Bergabunglah dengan komunitas kami dan nikmati pengalaman terbaik dengan layanan kami yang berkualitas tinggi.</p>
+            <h2>Selamat Datang Kembali</h2>
+            <p>Masuk ke akun Anda untuk mengakses semua fitur dan layanan yang tersedia.</p>
         </div>
     </div>
 
-    <script>
-        function showForm(formType) {
-            // Toggle active button
-            document.querySelectorAll('.toggle-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            // Toggle active form
-            document.querySelectorAll('.form').forEach(form => {
-                form.classList.remove('active');
-            });
-
-            // Activate selected form
-            document.querySelector(`.toggle-btn:nth-child(${formType === 'login' ? 1 : 2})`).classList.add('active');
-            document.getElementById(`${formType}-form`).classList.add('active');
-        }
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
