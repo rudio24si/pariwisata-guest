@@ -16,13 +16,21 @@ class DestinasiWisataController extends Controller
         $destinasi = DestinasiWisata::latest()->get();
         $pemandu = Warga::where('status', 'Aktif')->latest()->take(6)->get();
 
-        return view('guest.index', compact('destinasi', 'pemandu'));
+        return view('layouts.guest.index', compact('destinasi', 'pemandu'));
     }
 
     public function IndexAdmin()
     {
         $destinasi = DestinasiWisata::latest()->paginate(10);
         return view('admin.destinasi.index', compact('destinasi'));
+    }
+
+    public function tentang()
+    {
+        $destinasi = DestinasiWisata::latest()->get();
+        $pemandu = Warga::where('status', 'Aktif')->latest()->take(6)->get();
+
+        return view('pages.tentang.tentang', compact('destinasi', 'pemandu'));
     }
 
     public function create()
