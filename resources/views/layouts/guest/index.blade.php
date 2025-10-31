@@ -433,7 +433,7 @@
                                                     </p>
                                                 @endif
                                                 <div class="mxd-team-cards__contact anim-uni-in-up mt-3 ">
-                                                    <a href="https://wa.me/{{ $guide->telp }}?text=Hubungi%Pemandu%20Lokal"
+                                                    <a href="https://wa.me/{{ $guide->telp }}?text=Hubungi%20Pemandu%20Lokal"
                                                         class="btn btn-anim btn-default btn-sm btn-outline slide-right-up">
                                                         <i class="ph-bold ph-phone"></i>
                                                         <span class="btn-caption">Hubungi</span>
