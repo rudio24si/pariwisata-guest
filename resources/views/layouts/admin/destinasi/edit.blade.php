@@ -73,8 +73,7 @@
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <div>
-                    <h1 class="mb-0"><i class="fas fa-plus-circle"></i> Tambah Destinasi Wisata</h1>
-                    <p class="mb-0 mt-2">Lengkapi form di bawah untuk menambahkan destinasi baru</p>
+                    <h1 class="mb-0"><i class="fas fa-plus-circle"></i> Edit Destinasi Wisata</h1>
                 </div>
             </div>
         </div>
@@ -96,13 +95,13 @@
                         </div>
                         @endif
 
-                        <form action="{{ route('destinasi.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('destinasi.update', $destinasi->destinasi_id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
-
+                            @method('PUT')
                             <div class="mb-3">
                                 <label for="nama" class="form-label">Nama Destinasi <span class="required">*</span></label>
                                 <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                                    id="nama" name="nama" value="{{ old('nama') }}"
+                                    id="nama" name="nama" value="{{ $destinasi->nama }}"
                                     placeholder="Contoh: Pantai Kuta" required>
                                 @error('nama')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -113,7 +112,7 @@
                                 <label for="deskripsi" class="form-label">Deskripsi <span class="required">*</span></label>
                                 <textarea class="form-control @error('deskripsi') is-invalid @enderror"
                                     id="deskripsi" name="deskripsi" rows="4"
-                                    placeholder="Jelaskan tentang destinasi wisata ini..." required>{{ old('deskripsi') }}</textarea>
+                                    placeholder="Jelaskan tentang destinasi wisata ini..." required>{{$destinasi->deskripsi}}</textarea>
                                 @error('deskripsi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -123,7 +122,7 @@
                                 <div class="col-md-8 mb-3">
                                     <label for="alamat" class="form-label">Alamat <span class="required">*</span></label>
                                     <input type="text" class="form-control @error('alamat') is-invalid @enderror"
-                                        id="alamat" name="alamat" value="{{ old('alamat') }}"
+                                        id="alamat" name="alamat" value="{{ $destinasi->alamat}}"
                                         placeholder="Contoh: Jl. Pantai Kuta No. 123" required>
                                     @error('alamat')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -132,7 +131,7 @@
                                 <div class="col-md-2 mb-3">
                                     <label for="rt" class="form-label">RT</label>
                                     <input type="text" class="form-control @error('rt') is-invalid @enderror"
-                                        id="rt" name="rt" value="{{ old('rt') }}" placeholder="001">
+                                        id="rt" name="rt" value="{{ $destinasi->rt}}" placeholder="001">
                                     @error('rt')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -140,7 +139,7 @@
                                 <div class="col-md-2 mb-3">
                                     <label for="rw" class="form-label">RW</label>
                                     <input type="text" class="form-control @error('rw') is-invalid @enderror"
-                                        id="rw" name="rw" value="{{ old('rw') }}" placeholder="002">
+                                        id="rw" name="rw" value="{{ $destinasi->rw}}" placeholder="002">
                                     @error('rw')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -151,7 +150,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="jam_buka" class="form-label">Jam Buka <span class="required">*</span></label>
                                     <input type="text" class="form-control @error('jam_buka') is-invalid @enderror"
-                                        id="jam_buka" name="jam_buka" value="{{ old('jam_buka') }}"
+                                        id="jam_buka" name="jam_buka" value="{{$destinasi->jam_buka}}"
                                         placeholder="Contoh: 08:00 - 17:00" required>
                                     @error('jam_buka')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -160,7 +159,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="tiket" class="form-label">Harga Tiket (Rp) <span class="required">*</span></label>
                                     <input type="number" class="form-control @error('tiket') is-invalid @enderror"
-                                        id="tiket" name="tiket" value="{{ old('tiket') }}"
+                                        id="tiket" name="tiket" value="{{$destinasi->tiket}}"
                                         placeholder="50000" min="0" step="1000" required>
                                     @error('tiket')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -171,7 +170,7 @@
                             <div class="mb-3">
                                 <label for="kontak" class="form-label">Kontak</label>
                                 <input type="text" class="form-control @error('kontak') is-invalid @enderror"
-                                    id="kontak" name="kontak" value="{{ old('kontak') }}"
+                                    id="kontak" name="kontak" value="{{$destinasi->kontak}}"
                                     placeholder="Contoh: 0812-3456-7890">
                                 @error('kontak')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -179,15 +178,39 @@
                             </div>
 
                             <div class="mb-4">
-                                <label for="gambar" class="form-label">Foto Destinasi <span class="required">*</span></label>
-                                <input type="file" class="form-control @error('gambar') is-invalid @enderror"
-                                    id="gambar" name="gambar" accept="image/*" required onchange="previewImage(this)">
+                                <label for="gambar" class="form-label">
+                                    Foto Destinasi <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="file"
+                                    class="form-control @error('gambar') is-invalid @enderror"
+                                    id="gambar"
+                                    name="gambar"
+                                    accept="image/*"
+                                    onchange="previewImage(this)">
                                 <small class="text-muted">Format: JPG, PNG, GIF. Maksimal 2MB</small>
+
                                 @error('gambar')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                <img id="preview" class="image-preview" alt="Preview">
+
+                                {{-- ✅ Preview gambar lama --}}
+                                @if(!empty($destinasi->gambar))
+                                <div class="mt-3">
+                                    <p class="text-muted mb-1">Gambar saat ini:</p>
+                                    <img
+                                        src="{{ asset('uploads/destinasi/' . $destinasi->gambar) }}"
+                                        alt="Foto Destinasi Lama"
+                                        class="image-preview"
+                                        style="max-width: 200px; border-radius: 8px;">
+                                </div>
+                                @endif
+
+                                {{-- ✅ Preview gambar baru --}}
+                                <img id="preview" class="image-preview mt-2" alt="Preview" style="max-width: 200px; display: none; border-radius: 8px;">
                             </div>
+
 
                             <div class="d-flex gap-2">
                                 <button type="submit" class="btn btn-primary">

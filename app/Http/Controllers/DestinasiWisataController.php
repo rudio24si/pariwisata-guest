@@ -22,7 +22,7 @@ class DestinasiWisataController extends Controller
     public function IndexAdmin()
     {
         $destinasi = DestinasiWisata::latest()->paginate(10);
-        return view('admin.destinasi.index', compact('destinasi'));
+        return view('layouts.admin.destinasi.index', compact('destinasi'));
     }
 
     public function tentang()
@@ -35,7 +35,7 @@ class DestinasiWisataController extends Controller
 
     public function create()
     {
-        return view('admin.destinasi.create');
+        return view('layouts.admin.destinasi.create');
     }
 
     /**
@@ -88,7 +88,7 @@ class DestinasiWisataController extends Controller
     public function show(string $id)
     {
         $destinasi = DestinasiWisata::findOrFail($id);
-        return view('guest.detail', compact('destinasi'));
+        return view('layouts.guest.detail', compact('destinasi'));
     }
 
     /**
@@ -97,7 +97,7 @@ class DestinasiWisataController extends Controller
     public function edit(string $id)
     {
         $destinasi = DestinasiWisata::findOrFail($id);
-        return view('admin.destinasi.edit', compact('destinasi'));
+        return view('layouts.admin.destinasi.edit', compact('destinasi'));
     }
 
     /**
@@ -116,7 +116,7 @@ class DestinasiWisataController extends Controller
             'jam_buka' => 'required|string|max:100',
             'tiket' => 'required|numeric|min:0',
             'kontak' => 'nullable|string|max:50',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5000',
         ]);
 
         $data = $request->all();
@@ -139,7 +139,7 @@ class DestinasiWisataController extends Controller
 
         $destinasi->update($data);
 
-        return redirect()->route('destinasi.index')
+        return redirect()->route('indexAdmin')
             ->with('success', 'Destinasi wisata berhasil diupdate!');
     }
 

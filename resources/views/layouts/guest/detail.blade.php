@@ -1,4 +1,4 @@
-@extends('guest.layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <!-- Page Content Start -->

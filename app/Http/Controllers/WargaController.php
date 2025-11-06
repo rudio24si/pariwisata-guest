@@ -13,7 +13,7 @@ class WargaController extends Controller
     public function index()
     {
         $warga = Warga::latest()->paginate(10);
-        return view('admin.warga.index', compact('warga'));
+        return view('layouts.admin.warga.index', compact('warga'));
     }
 
     /**
@@ -21,7 +21,7 @@ class WargaController extends Controller
      */
     public function create()
     {
-        return view('admin.warga.create');
+        return view('layouts.admin.warga.create');
     }
 
     /**
@@ -72,7 +72,7 @@ class WargaController extends Controller
 
         Warga::create($data);
 
-        return redirect()->route('indexAdmin')
+        return redirect()->route('warga')
             ->with('success', 'Data pemandu lokal berhasil ditambahkan!');
     }
 
@@ -82,7 +82,7 @@ class WargaController extends Controller
     public function show(string $id)
     {
         $warga = Warga::findOrFail($id);
-        return view('warga.show', compact('warga'));
+        return view('layouts.admin.warga.show', compact('warga'));
     }
 
     /**
@@ -91,7 +91,7 @@ class WargaController extends Controller
     public function edit(string $id)
     {
         $warga = Warga::findOrFail($id);
-        return view('warga.edit', compact('warga'));
+        return view('layouts.admin.warga.edit', compact('warga'));
     }
 
     /**
@@ -154,7 +154,7 @@ class WargaController extends Controller
 
         $warga->delete();
 
-        return redirect()->route('warga.index')
+        return redirect()->route('layouts.admin.warga.index')
             ->with('success', 'Data pemandu lokal berhasil dihapus!');
     }
 }

@@ -8,8 +8,8 @@ use App\Http\Controllers\WargaController;
 
 // DESTINASI
 Route::get('/', [DestinasiWisataController::class, 'index'])->name('dashboard');
-Route::get('/admin', [DestinasiWisataController::class, 'IndexAdmin'])->name('indexAdmin');
 Route::resource('destinasi', DestinasiWisataController::class);
+Route::get('/admin', [DestinasiWisataController::class, 'IndexAdmin'])->name('indexAdmin');
 Route::get('/tentang', [DestinasiWisataController::class,'tentang'])->name('tentang');
 // DESTINASI END
 
