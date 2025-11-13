@@ -35,7 +35,7 @@ class DestinasiWisataController extends Controller
 
     public function create()
     {
-        return view('layouts.admin.destinasi.create');
+        return view('pages.destinasi.create');
     }
 
     /**
@@ -78,7 +78,7 @@ class DestinasiWisataController extends Controller
 
         DestinasiWisata::create($data);
 
-        return redirect()->route('indexAdmin')
+        return redirect()->route('dashboard')
             ->with('success', 'Destinasi wisata berhasil ditambahkan!');
     }
 
@@ -97,7 +97,7 @@ class DestinasiWisataController extends Controller
     public function edit(string $id)
     {
         $destinasi = DestinasiWisata::findOrFail($id);
-        return view('layouts.admin.destinasi.edit', compact('destinasi'));
+        return view('pages.destinasi.edit', compact('destinasi'));
     }
 
     /**
@@ -139,7 +139,7 @@ class DestinasiWisataController extends Controller
 
         $destinasi->update($data);
 
-        return redirect()->route('indexAdmin')
+        return redirect('/')
             ->with('success', 'Destinasi wisata berhasil diupdate!');
     }
 
@@ -157,7 +157,7 @@ class DestinasiWisataController extends Controller
 
         $destinasi->delete();
 
-        return redirect()->route('indexAdmin')
+        return redirect()->route('dashboard')
             ->with('success', 'Destinasi wisata berhasil dihapus!');
     }
 }

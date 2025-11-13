@@ -16,7 +16,7 @@
                         <div class="col-12 col-xl-10 mxd-grid-item no-margin">
                             <div class="mxd-block__content">
                                 <div class="mxd-block__inner-headline loading__item">
-                                    <h1 class="inner-headline__title">{{ $destinasi->nama }}</h1>
+                                    <h1 clas s="inner-headline__title">{{ $destinasi->nama }}</h1>
                                 </div>
                             </div>
                         </div>
@@ -40,6 +40,7 @@
     <!-- Section - Inner Page Headline End -->
 
     <!-- Section - Parallax Divider Start -->
+    <!-- Section - Parallax Divider Start -->
     <div class="mxd-section">
         <div class="mxd-container">
             <div class="mxd-divider loading__fade">
@@ -47,8 +48,39 @@
                     <img src="{{asset('uploads/destinasi/'.$destinasi->gambar)}}" alt="Gambar Destinasi">
                 </div>
             </div>
+
+            <!-- Tombol Edit & Hapus -->
+            <div class="mxd-manifest__controls anim-uni-in-up">
+                <div class="mxd-btngroup d-flex justify-content-between w-100">
+                    <!-- Tombol Edit - Rata Kiri -->
+                    <div class="d-flex">
+                        <a class="btn btn-anim btn-default btn-accent slide-right-up"
+                            href="{{ route('destinasi.edit', $destinasi->destinasi_id) }}">
+                            <span class="btn-caption">Edit Destinasi</span>
+                            <i class="ph-bold ph-pencil-simple"></i>
+                        </a>
+                    </div>
+
+                    <!-- Tombol Hapus - Rata Kanan -->
+                    <div class="d-flex">
+                        <form action="{{ route('destinasi.destroy', $destinasi->destinasi_id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-anim btn-default btn-outline slide-right-up"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus destinasi ini?')">
+                                <span class="btn-caption">Hapus Destinasi</span>
+                                <i class="ph-bold ph-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- Section - Parallax Divider End -->
+
+
+
     <!-- Section - Parallax Divider End -->
 
     <!-- Section - Project Details Start -->

@@ -207,6 +207,15 @@
                     @endforeach
                     <!-- item -->
                 </div>
+                <div class="mxd-manifest__controls anim-uni-in-up">
+                    <div class="mxd-btngroup">
+                        <a class="btn btn-anim btn-default btn-accent slide-right-up"
+                            href="{{route('destinasi.create')}}">
+                            <span class="btn-caption">Tambah Destinasi</span>
+                            <i class="ph-bold ph-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
             <!-- Block - Projects List #02 End -->
         </div>
@@ -454,6 +463,15 @@
                             @endforeach
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="mxd-manifest__controls anim-uni-in-up">
+                <div class="mxd-btngroup">
+                    <a class="btn btn-anim btn-default btn-accent slide-right-up"
+                        href="works-simple.html">
+                        <span class="btn-caption">Tambah pemandu</span>
+                        <i class="ph-bold ph-arrow-up-right"></i>
+                    </a>
                 </div>
             </div>
             <!-- Block - Team Cards End -->

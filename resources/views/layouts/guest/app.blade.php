@@ -25,7 +25,6 @@
     @include('layouts.guest.footer')
 
     @include('layouts.guest.js')
-
 </body>
 
 </html>
