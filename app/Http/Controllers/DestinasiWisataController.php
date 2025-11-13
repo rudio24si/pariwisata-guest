@@ -16,7 +16,7 @@ class DestinasiWisataController extends Controller
         $destinasi = DestinasiWisata::latest()->get();
         $pemandu = Warga::where('status', 'Aktif')->latest()->take(6)->get();
 
-        return view('layouts.guest.index', compact('destinasi', 'pemandu'));
+        return view('pages.destinasi.index', compact('destinasi', 'pemandu'));
     }
 
     public function IndexAdmin()
@@ -88,7 +88,7 @@ class DestinasiWisataController extends Controller
     public function show(string $id)
     {
         $destinasi = DestinasiWisata::findOrFail($id);
-        return view('layouts.guest.detail', compact('destinasi'));
+        return view('pages.destinasi.detail', compact('destinasi'));
     }
 
     /**

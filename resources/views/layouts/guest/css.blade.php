@@ -130,4 +130,149 @@
     [data-theme="dark"] .logout-btn:hover {
         background-color: #3a2a2a;
     }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 1000;
+    }
+
+    .whatsapp-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background-color: #25D366;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+        animation: pulse-whatsapp 2s infinite;
+    }
+
+    .whatsapp-link:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+        background-color: #128C7E;
+    }
+
+    .whatsapp-link i {
+        font-size: 32px;
+        color: white;
+    }
+
+    @keyframes pulse-whatsapp {
+        0% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+
+        70% {
+            box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .whatsapp-float {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .whatsapp-link {
+            width: 55px;
+            height: 55px;
+        }
+
+        .whatsapp-link i {
+            font-size: 28px;
+        }
+    }
+
+    .about-section {
+        padding: 60px 0;
+    }
+
+    .about-section.gray-bg {
+        background: #f8f9fa;
+    }
+
+    .about-section.green-bg {
+        background: #2E8B57;
+        color: white;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .visi-misi-box {
+        padding: 2rem;
+    }
+
+    .visi-misi-box h3 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+    }
+
+    .visi-misi-box ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .visi-misi-box ul li {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .facility-card {
+        text-align: center;
+        padding: 2rem;
+        transition: transform 0.3s ease;
+    }
+
+    .facility-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .facility-card i {
+        font-size: 3.5rem;
+        color: #2E8B57;
+        margin-bottom: 1rem;
+    }
+
+    .facility-card h4 {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+        font-weight: 600;
+    }
+
+    .stats-card {
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .stats-number {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .stats-label {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
 </style>

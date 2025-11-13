@@ -1,90 +1,4 @@
-@extends('layouts.app')
-
-@push('styles')
-    <style>
-        .about-section {
-            padding: 60px 0;
-        }
-
-        .about-section.gray-bg {
-            background: #f8f9fa;
-        }
-
-        .about-section.green-bg {
-            background: #2E8B57;
-            color: white;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .visi-misi-box {
-            padding: 2rem;
-        }
-
-        .visi-misi-box h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .visi-misi-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .visi-misi-box ul li {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .facility-card {
-            text-align: center;
-            padding: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .facility-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .facility-card i {
-            font-size: 3.5rem;
-            color: #2E8B57;
-            margin-bottom: 1rem;
-        }
-
-        .facility-card h4 {
-            font-size: 1.5rem;
-            margin: 1rem 0;
-            font-weight: 600;
-        }
-
-        .stats-card {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .stats-number {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .stats-label {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-    </style>
-@endpush
+@extends('layouts.guest.app')
 
 @section('content')
     <!-- Page Content Start -->
@@ -255,14 +169,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="visi-misi-box anim-uni-in-up">
-                            <h3>Visi Kami</h3>
+                            <h3 class="text-secondary">Visi Kami</h3>
                             <p>Menjadi destinasi wisata desa terdepan yang menawarkan pengalaman autentik, berkelanjutan,
                                 dan memberdayakan masyarakat lokal.</p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="visi-misi-box anim-uni-in-up">
-                            <h3>Misi Kami</h3>
+                            <h3 class="text-secondary">Misi Kami</h3>
                             <ul>
                                 <li>✓ Melestarikan budaya dan tradisi lokal</li>
                                 <li>✓ Meningkatkan kesejahteraan masyarakat</li>

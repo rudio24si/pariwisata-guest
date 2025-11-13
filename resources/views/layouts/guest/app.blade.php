@@ -7,24 +7,24 @@
     <!-- Page Title -->
     <title>Pariwisata</title>
 
-    @include('layouts.css')
+    @include('layouts.guest.css')
 
 </head>
 
 <body>
 
-    @include('layouts.preloader')
+    @include('layouts.guest.preloader')
 
-    @include('layouts.navbar')
+    @include('layouts.guest.navbar')
 
-    @include('layouts.header')
+    @include('layouts.guest.header')
 
     <!-- content -->
     @yield('content')
 
-    @include('layouts.footer')
+    @include('layouts.guest.footer')
 
-    @include('layouts.js')
+    @include('layouts.guest.js')
 
 </body>
 
