@@ -242,7 +242,7 @@
                                     <div class="mxd-manifest__controls anim-uni-in-up">
                                         <div class="mxd-btngroup centered">
                                             <a class="btn btn-anim btn-default btn-accent slide-right-up"
-                                                href="works-simple.html">
+                                                href="{{ route('booking.create') }}">
                                                 <span class="btn-caption">Booking</span>
                                                 <i class="ph-bold ph-arrow-up-right"></i>
                                             </a>

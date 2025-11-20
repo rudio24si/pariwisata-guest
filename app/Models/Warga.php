@@ -1,17 +1,13 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Warga extends Model
 {
-    use HasFactory;
-
     protected $table = 'warga';
     protected $primaryKey = 'warga_id';
-    public $timestamps = true;
+    public $timestamps = false; // ubah jika pakai timestamps
 
     protected $fillable = [
         'no_ktp',
@@ -20,11 +16,11 @@ class Warga extends Model
         'agama',
         'pekerjaan',
         'telp',
-        'email',
-        'foto',
-        'deskripsi', // tambahan untuk deskripsi pemandu
-        'pengalaman', // lama pengalaman jadi pemandu
-        'bahasa', // bahasa yang dikuasai
-        'status' // aktif/tidak aktif
+        'email'
     ];
+
+    public function bookings()
+    {
+        return $this->hasMany(BookingHomestay::class, 'warga_id', 'warga_id');
+    }
 }
