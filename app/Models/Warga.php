@@ -19,8 +19,14 @@ class Warga extends Model
         'email'
     ];
 
-    public function bookings()
+    public function scopeSearch($query, $request, array $columns)
     {
-        return $this->hasMany(BookingHomestay::class, 'warga_id', 'warga_id');
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request, $columns) {
+                foreach ($columns as $column) {
+                    $q->orWhere($column, 'LIKE', '%' . $request->search . '%');
+                }
+            });
+        }
     }
 }

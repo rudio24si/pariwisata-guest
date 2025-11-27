@@ -1,3 +1,4 @@
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
  <!-- To Top Button Start -->
  <a href="#0" id="to-top" class="btn btn-to-top slide-up anim-no-delay">
      <i class="ph ph-arrow-up"></i>

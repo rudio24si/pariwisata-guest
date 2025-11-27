@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DestinasiWisata;
 use App\Models\Warga;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DestinasiWisataController extends Controller
@@ -23,6 +24,29 @@ class DestinasiWisataController extends Controller
     {
         $destinasi = DestinasiWisata::latest()->paginate(10);
         return view('layouts.admin.destinasi.index', compact('destinasi'));
+    }
+
+    public function allData()
+    {
+        return view('pages.all_data.allData');
+    }
+    public function allData_user(Request $request)
+    {
+        $searchableColumns = ['name','email'];
+        $users = User::search($request,$searchableColumns)->paginate(10)->onEachSide(1)->withQueryString() ;
+        return view('pages.all_data.allData_user', compact('users'));
+    }
+    public function allData_warga(Request $request)
+    {
+        $searchableColumns = ['nama','email'];
+        $warga = Warga::search($request,$searchableColumns)->paginate(10)->onEachSide(1)->withQueryString() ;
+        return view('pages.all_data.allData_warga', compact('warga'));
+    }
+    public function allData_destinasi(Request $request)
+    {
+        $searchableColumns = ['nama','rt','rw','alamat'];
+        $destinasi = DestinasiWisata::search($request,$searchableColumns)->paginate(10)->onEachSide(1)->withQueryString() ;
+        return view('pages.all_data.allData_destinasi', compact('destinasi'));
     }
 
     public function tentang()

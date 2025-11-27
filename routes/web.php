@@ -18,15 +18,12 @@ Route::get('/tentang', [DestinasiWisataController::class, 'tentang'])->name('ten
 Route::resource('warga', WargaController::class);
 // WARGA END
 
-// Booking homestay
-// Booking homestay (create + store)
-Route::get('/booking/create', [App\Http\Controllers\BookingHomeStayController::class, 'create'])->name('booking.create');
-Route::post('/booking', [App\Http\Controllers\BookingHomeStayController::class, 'store'])->name('booking.store');
-
-// AJAX: ambil kamar berdasarkan homestay (untuk opsi B)
-Route::get('/api/homestay/{id}/kamar', [App\Http\Controllers\BookingHomeStayController::class, 'getKamar'])->name('api.homestay.kamar');
-
-
+// ALL DATA
+Route::get('/all_data', [DestinasiWisataController::class, 'allData'])->name('allData');
+Route::get('/all_data/user', [DestinasiWisataController::class, 'allData_user'])->name('allData_user');
+Route::get('/all_data/warga', [DestinasiWisataController::class, 'allData_warga'])->name('allData_warga');
+Route::get('/all_data/destinasi_wisata', [DestinasiWisataController::class, 'allData_destinasi'])->name('allData_destinasi_wisata');
+// ALL DATA DONE
 
 // AUTH
 Route::get('/login', [AuthController::class, 'index'])->name('login');
