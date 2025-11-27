@@ -8,7 +8,7 @@
         <div class="mxd-section mxd-section-inner-headline padding-default">
             <div class="mxd-container grid-container">
                 <!-- Block - Inner Page Headline Start -->
-                <div class="mxd-block loading-wrap">    
+                <div class="mxd-block loading-wrap">
                     <div class="container-fluid px-0">
                         <div class="row gx-0">
 
@@ -21,16 +21,17 @@
                                 </div>
                             </div>
                         </div>
-                        <form method="GET" action="{{ route('allData_destinasi_wisata') }}" onchange="this.form.submit()" class="mb-3">
+                        <form method="GET" action="{{ route('allData_destinasi_wisata') }}" class="mb-3">
                             <div class="row">
-                                <!-- <div class="col-md-2">
-                                                <select name="gender" class="form-select">
-                                                    <option value="">All</option>
-                                                    <option value="Male" {{ request('gender') == 'Male' ? 'selected' : '' }}>Male</option>
-                                                    <option value="Female" {{ request('gender') == 'Female' ? 'selected' : '' }}>Female
-                                                    </option>
-                                                </select>
-                                            </div> -->
+                                <div class="col-md-2">
+                                    <select name="nama" class="form-select" onchange="this.form.submit()">
+                                        <option value="">All</option>
+                                        <option value="Pantai Indah Kencana" {{ request('nama') == 'Pantai Indah Kencana' ? 'selected' : '' }}>Pantai Indah Kencana
+                                        </option>
+                                        <option value="pantai" {{ request('nama') == 'pantai' ? 'selected' : '' }}>Pantai
+                                        </option>
+                                    </select>
+                                </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <input type="text" name="search" class="form-control" id="exampleInputIconRight"

@@ -8,7 +8,7 @@
         <div class="mxd-section mxd-section-inner-headline padding-default">
             <div class="mxd-container grid-container">
                 <!-- Block - Inner Page Headline Start -->
-                <div class="mxd-block loading-wrap">    
+                <div class="mxd-block loading-wrap">
                     <div class="container-fluid px-0">
                         <div class="row gx-0">
 
@@ -21,16 +21,16 @@
                                 </div>
                             </div>
                         </div>
-                        <form method="GET" action="{{ route('allData_warga') }}" onchange="this.form.submit()" class="mb-3">
+                        <form method="GET" action="{{ route('allData_warga') }}" class="mb-3">
                             <div class="row">
-                                <!-- <div class="col-md-2">
-                                                <select name="gender" class="form-select">
-                                                    <option value="">All</option>
-                                                    <option value="Male" {{ request('gender') == 'Male' ? 'selected' : '' }}>Male</option>
-                                                    <option value="Female" {{ request('gender') == 'Female' ? 'selected' : '' }}>Female
-                                                    </option>
-                                                </select>
-                                            </div> -->
+                                <div class="col-md-2">
+                                    <select name="jenis_kelamin" class="form-select" onchange="this.form.submit()">
+                                        <option value="">All</option>
+                                        <option value="Laki-laki" {{ request('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                        <option value="Perempuan" {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan
+                                        </option>
+                                    </select>
+                                </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <input type="text" name="search" class="form-control" id="exampleInputIconRight"

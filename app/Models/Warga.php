@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Warga extends Model
 {
@@ -18,6 +19,16 @@ class Warga extends Model
         'telp',
         'email'
     ];
+
+    public function scopeFilter(Builder $query, $request, array $filterableColumns): Builder
+    {
+        foreach ($filterableColumns as $column) {
+            if ($request->filled($column)) {
+                $query->where($column, $request->input($column));
+            }
+        }
+        return $query;
+    }
 
     public function scopeSearch($query, $request, array $columns)
     {

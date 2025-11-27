@@ -32,20 +32,23 @@ class DestinasiWisataController extends Controller
     }
     public function allData_user(Request $request)
     {
+        $filterableColumns = ['role'];
         $searchableColumns = ['name','email'];
-        $users = User::search($request,$searchableColumns)->paginate(10)->onEachSide(1)->withQueryString() ;
+        $users = User::filter($request, $filterableColumns)->search($request,$searchableColumns)->paginate(12)->onEachSide(1)->withQueryString() ;
         return view('pages.all_data.allData_user', compact('users'));
     }
     public function allData_warga(Request $request)
     {
+        $filterableColumns = ['jenis_kelamin'];
         $searchableColumns = ['nama','email'];
-        $warga = Warga::search($request,$searchableColumns)->paginate(10)->onEachSide(1)->withQueryString() ;
+        $warga = Warga::filter($request, $filterableColumns)->search($request,$searchableColumns)->paginate(12)->onEachSide(1)->withQueryString() ;
         return view('pages.all_data.allData_warga', compact('warga'));
     }
     public function allData_destinasi(Request $request)
     {
+        $filterableColumns = ['nama'];
         $searchableColumns = ['nama','rt','rw','alamat'];
-        $destinasi = DestinasiWisata::search($request,$searchableColumns)->paginate(10)->onEachSide(1)->withQueryString() ;
+        $destinasi = DestinasiWisata::filter($request, $filterableColumns)->search($request,$searchableColumns)->paginate(12)->onEachSide(1)->withQueryString() ;
         return view('pages.all_data.allData_destinasi', compact('destinasi'));
     }
 
